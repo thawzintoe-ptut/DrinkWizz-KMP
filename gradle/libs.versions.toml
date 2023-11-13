@@ -17,6 +17,20 @@ androidx-test-junit = "1.1.5"
 androidx-espresso-core = "3.5.1"
 kotlin = "1.9.20"
 junit = "4.13.2"
+activity-compose = "1.7.2"
+kotlinxSerializationJson = "1.5.1"
+ktorClientCore = "2.3.3"
+ktorClientLogging = "2.3.2"
+mvvmCore = "0.16.1"
+resourcesVersion = "0.23.0"
+serializable = "1.9.0"
+voyager = "1.0.0-rc05"
+mokoGraphic = "0.9.0"
+ktlint = "11.5.1"
+sqlDelight = "2.0.0"
+imageLoaderExtensionImageio = "1.6.4"
+appcompat = "1.6.1"
+coreKtx = "1.10.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -38,6 +52,55 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+#voyagar
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
+voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
+# moko libraries
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoaderExtensionImageio" }
+image-loader-extension-blur = { module = "io.github.qdsfdhvh:image-loader-extension-blur", version.ref = "imageLoaderExtensionImageio" }
+image-loader-extension-imageio = { module = "io.github.qdsfdhvh:image-loader-extension-imageio", version.ref = "imageLoaderExtensionImageio" }
+image-loader-extension-moko-resources = { module = "io.github.qdsfdhvh:image-loader-extension-moko-resources", version.ref = "imageLoaderExtensionImageio" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientLogging" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCore" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktorClientCore" }
+ktor-client-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktorClientLogging" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientLogging" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktorClientCore" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorClientLogging" }
+moko-resources = { module = "dev.icerock.moko:resources", version.ref = "resourcesVersion" }
+moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "resourcesVersion" }
+moko-gradle-plugin = { module = "dev.icerock.moko:resources-generator", version.ref = "resourcesVersion" }
+moko-graphic = { module = "dev.icerock.moko:graphic", version.ref = "mokoGraphic" }
+mvvm-compose = { module = "dev.icerock.moko:mvvm-compose", version.ref = "mvvmCore" }
+mvvm-core = { module = "dev.icerock.moko:mvvm-core", version.ref = "mvvmCore" }
+mvvm-databinding = { module = "dev.icerock.moko:mvvm-databinding", version.ref = "mvvmCore" }
+mvvm-flow = { module = "dev.icerock.moko:mvvm-flow", version.ref = "mvvmCore" }
+mvvm-flow-compose = { module = "dev.icerock.moko:mvvm-flow-compose", version.ref = "mvvmCore" }
+mvvm-livedata-compose = { module = "dev.icerock.moko:mvvm-livedata-compose", version.ref = "mvvmCore" }
+mvvm-livedata-glide = { module = "dev.icerock.moko:mvvm-livedata-glide", version.ref = "mvvmCore" }
+mvvm-livedata-material = { module = "dev.icerock.moko:mvvm-livedata-material", version.ref = "mvvmCore" }
+mvvm-livedata-swiperefresh = { module = "dev.icerock.moko:mvvm-livedata-swiperefresh", version.ref = "mvvmCore" }
+mvvm-state = { module = "dev.icerock.moko:mvvm-state", version.ref = "mvvmCore" }
+mvvm-livedata = { module = "dev.icerock.moko:mvvm-livedata", version.ref = "mvvmCore" }
+mvvm-viewbinding = { module = "dev.icerock.moko:mvvm-viewbinding", version.ref = "mvvmCore" }
+
+# sql delight
+sqlDelight-nativeDriver = { group = "app.cash.sqldelight", name = "native-driver", version.ref = "sqlDelight" }
+sqlDelight-runTime = { group = "app.cash.sqldelight", name = "runtime", version.ref = "sqlDelight" }
+sqlDelight-android = { group = "app.cash.sqldelight", name = "android-driver", version.ref = "sqlDelight" }
+sqlDelight-adapter = { group = "app.cash.sqldelight", name = "primitive-adapters", version.ref = "sqlDelight" }
+sqlDelight-coroutine = { group = "app.cash.sqldelight", name = "coroutines-extensions", version.ref = "sqlDelight" }
+
+# koin core-main
+koin-core = { group = "io.insert-koin", name = "koin-core", version = "3.4.3" }
+koin-compose = { group = "io.insert-koin", name = "koin-compose", version = "1.0.4" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version = "3.4.3" }
+koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version = "3.4.6" }
+
 
 [plugins]
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -46,3 +109,8 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinNativeCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serializable" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "resourcesVersion" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight"  }
