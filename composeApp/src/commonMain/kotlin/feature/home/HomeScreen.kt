@@ -1,12 +1,15 @@
 package feature.home
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -32,16 +35,20 @@ import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreenContent(
     modifier: Modifier = Modifier
 ) {
     val listState = rememberLazyListState()
+    val rowState = rememberLazyListState()
     LazyColumn(
         state = listState,
         modifier = modifier.fillMaxSize()
     ) {
-        item { HomeHeaderTopAppbar() }
+        stickyHeader {
+            HomeHeaderTopAppbar()
+        }
         item {
             HomeHeaderContent(
                 modifier = Modifier
@@ -51,8 +58,18 @@ fun HomeScreenContent(
         item {
             HomeCategories(
                 modifier = Modifier
+                    .padding(horizontal = 8.dp),
+                rowListState = rowState
+            )
+        }
+        item {
+            DrinkByCategoryList(
+                modifier = Modifier
                     .padding(horizontal = 16.dp)
             )
+        }
+        item {
+            Spacer(Modifier.height(36.dp))
         }
     }
 }
@@ -82,7 +99,7 @@ fun HomeHeaderTopAppbar() {
                 )
             }
         },
-        backgroundColor = Color.Transparent,
+        backgroundColor = Color.White,
         elevation = 0.dp
     )
 }
@@ -96,7 +113,7 @@ fun HomeHeaderContent(
         "I want to learn...",
         color = Color(0xFF1E2742),
         fontSize = TextUnit(24F, TextUnitType.Sp),
-        modifier = modifier.padding(top = 24.dp),
+        modifier = modifier.padding(top = 24.dp, start = 8.dp, end = 8.dp),
         fontWeight = FontWeight.Bold
     )
     Card(

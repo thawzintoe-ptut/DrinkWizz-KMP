@@ -99,7 +99,9 @@ fun SplashScreenContent() {
                 ) {
                     Text(
                         text = "Get Started",
-                        color = Color.White
+                        color = Color.White,
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
                     )
                     Image(
                         imageVector = Icons.Rounded.ArrowForward,
