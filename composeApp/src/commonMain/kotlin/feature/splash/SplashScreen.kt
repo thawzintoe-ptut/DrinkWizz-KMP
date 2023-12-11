@@ -26,11 +26,19 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import feature.BasicNavigationScreen
+import feature.home.HomeScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+
+class SplashScreen() : Screen {
+    @Composable
+    override fun Content() {
+        SplashScreenContent()
+    }
+}
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -79,9 +87,7 @@ fun SplashScreenContent() {
         ) {
             Button(
                 onClick = {
-                    navigator.push(
-                        BasicNavigationScreen(1)
-                    )
+                    navigator.push(HomeScreen())
                 },
                 modifier = Modifier
                     .width(180.dp)

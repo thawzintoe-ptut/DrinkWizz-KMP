@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.sqldelight)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -36,6 +38,8 @@ kotlin {
             implementation(libs.compose.ui)
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.sqlDelight.android)
+            implementation(libs.ktor.client.okhttp)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -48,12 +52,38 @@ kotlin {
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
             implementation(libs.kotlinx.collections.immutable)
+            implementation(libs.sqlDelight.runTime)
+            implementation(libs.sqlDelight.coroutine)
+            implementation(libs.sqlDelight.adapter)
+            implementation(libs.kotlinx.coroutines.core)
+            // koin
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            // ktor
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.cio)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.sqlDelight.nativeDriver)
+            implementation(libs.ktor.client.darwin)
+        }
+    }
+}
+
+sqldelight {
+    databases {
+        create("DrinkWizzDB") {
+            packageName.set(libs.versions.nameSpace.get())
         }
     }
 }
 
 android {
-    namespace = "org.ptut.drinkwizz"
+    namespace = libs.versions.nameSpace.get()
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -61,7 +91,7 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "org.ptut.drinkwizz"
+        applicationId = libs.versions.nameSpace.get()
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -98,7 +128,7 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "org.ptut.drinkwizz"
+            packageName = libs.versions.nameSpace.get()
             packageVersion = "1.0.0"
         }
     }

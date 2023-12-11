@@ -23,6 +23,8 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -34,14 +36,27 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.screen.Screen
 import component.gridItems
+import di.getScreenModel
 import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
+class HomeScreen() : Screen {
+
+    @Composable
+    override fun Content() {
+        val homeViewModel = getScreenModel<HomeViewModel>()
+        val state by homeViewModel.uiState.collectAsState()
+        HomeScreenContent(state)
+    }
+}
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreenContent(
+    homeScreenState: HomeScreenState,
     modifier: Modifier = Modifier
 ) {
     val listState = rememberLazyListState()
@@ -49,6 +64,7 @@ fun HomeScreenContent(
     val title = remember {
         mutableStateOf("Cocktails")
     }
+
     LazyColumn(
         state = listState,
         modifier = modifier.fillMaxSize()
@@ -73,17 +89,22 @@ fun HomeScreenContent(
             DrinkByCategoryListHeader(title = title.value)
         }
 
-        gridItems(
-            data = cocktailVOList.toImmutableList(),
-            nColumns = 2
-        ) { cocktailVO ->
-            Box {
-                DrinkItemContent(
-                    cocktailVO,
-                    modifier = Modifier.height(200.dp)
-                        .padding(8.dp)
-                )
+        when (homeScreenState) {
+            is HomeScreenState.Success -> {
+                gridItems(
+                    data = homeScreenState.cocktailList.toImmutableList(),
+                    nColumns = 2
+                ) { cocktailVO ->
+                    Box {
+                        DrinkItemContent(
+                            cocktailVO,
+                            modifier = Modifier.height(200.dp)
+                                .padding(8.dp)
+                        )
+                    }
+                }
             }
+            else -> Unit
         }
 
         item {
@@ -168,12 +189,3 @@ fun HomeHeaderContent(
         }
     }
 }
-
-val cocktailVOList = listOf(
-    CocktailVO("1", "Margarita"),
-    CocktailVO("2", "Mojito"),
-    CocktailVO("3", "Cosmopolitan"),
-    CocktailVO("4", "Bloody Mary"),
-    CocktailVO("5", "Pina Colada"),
-    CocktailVO("6", "Mai Tai"),
-)
