@@ -7,8 +7,7 @@ import feature.home.HomeScreenContent
 import feature.splash.SplashScreenContent
 
 class BasicNavigationScreen(
-    val index: Int,
-    val wrapContent: Boolean = false
+    val index: Int
 ) : Screen {
 
     override val key = uniqueScreenKey

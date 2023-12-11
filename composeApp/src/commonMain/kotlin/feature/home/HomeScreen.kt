@@ -23,6 +23,8 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,6 +34,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import component.gridItems
+import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
@@ -42,6 +46,9 @@ fun HomeScreenContent(
 ) {
     val listState = rememberLazyListState()
     val rowState = rememberLazyListState()
+    val title = remember {
+        mutableStateOf("Cocktails")
+    }
     LazyColumn(
         state = listState,
         modifier = modifier.fillMaxSize()
@@ -63,11 +70,22 @@ fun HomeScreenContent(
             )
         }
         item {
-            DrinkByCategoryList(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-            )
+            DrinkByCategoryListHeader(title = title.value)
         }
+
+        gridItems(
+            data = cocktailVOList.toImmutableList(),
+            nColumns = 2
+        ) { cocktailVO ->
+            Box {
+                DrinkItemContent(
+                    cocktailVO,
+                    modifier = Modifier.height(200.dp)
+                        .padding(8.dp)
+                )
+            }
+        }
+
         item {
             Spacer(Modifier.height(36.dp))
         }
@@ -150,3 +168,12 @@ fun HomeHeaderContent(
         }
     }
 }
+
+val cocktailVOList = listOf(
+    CocktailVO("1", "Margarita"),
+    CocktailVO("2", "Mojito"),
+    CocktailVO("3", "Cosmopolitan"),
+    CocktailVO("4", "Bloody Mary"),
+    CocktailVO("5", "Pina Colada"),
+    CocktailVO("6", "Mai Tai"),
+)
